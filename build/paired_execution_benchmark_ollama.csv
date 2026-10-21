@@ -1,0 +1,5 @@
+condition,type,dimension,samples,cpu_median_ms,gpu_median_ms,cpu_p95_ms,gpu_p95_ms,cpu_over_gpu_speedup,measured_winner,correct
+ollama,VectorAdd,65536,20,0.0161645,0.435746,0.040075,0.471609,0.0370962,CPU,true
+ollama,VectorAdd,1048576,20,1.06636,4.43734,1.31505,5.20944,0.240315,CPU,true
+ollama,MatrixMultiply,256,20,9.2467,0.546272,9.49383,2.28268,16.9269,GPU,true
+ollama,MatrixMultiply,512,20,136.604,2.02376,144.851,2.91157,67.5001,GPU,true

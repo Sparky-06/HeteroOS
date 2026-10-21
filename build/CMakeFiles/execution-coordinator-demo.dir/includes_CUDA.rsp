@@ -1,0 +1,1 @@
+-I/home/sparky/Documents/Codes/HeteroOS/include -I/usr/local/cuda/include -isystem "/usr/local/cuda/targets/x86_64-linux/include" -isystem "/usr/local/cuda/targets/x86_64-linux/include/cccl"
