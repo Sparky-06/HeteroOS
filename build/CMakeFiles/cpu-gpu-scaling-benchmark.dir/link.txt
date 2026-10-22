@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/cpu-gpu-scaling-benchmark.dir/link.d "CMakeFiles/cpu-gpu-scaling-benchmark.dir/app/cpu_gpu_scaling_benchmark.cpp.o" "CMakeFiles/cpu-gpu-scaling-benchmark.dir/src/execution/cpu_executor.cpp.o" -o cpu-gpu-scaling-benchmark

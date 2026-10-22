@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/task-manager-demo.dir/link.d "CMakeFiles/task-manager-demo.dir/app/task_manager_demo.cpp.o" "CMakeFiles/task-manager-demo.dir/src/task/task.cpp.o" "CMakeFiles/task-manager-demo.dir/src/task/task_manager.cpp.o" -o task-manager-demo

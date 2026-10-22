@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/task-demo.dir/link.d "CMakeFiles/task-demo.dir/app/task_demo.cpp.o" "CMakeFiles/task-demo.dir/src/task/task.cpp.o" -o task-demo

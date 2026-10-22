@@ -1,5 +1,0 @@
-condition,type,dimension,samples,cpu_median_ms,gpu_median_ms,cpu_p95_ms,gpu_p95_ms,cpu_over_gpu_speedup,measured_winner,correct
-idle,VectorAdd,65536,20,0.0150415,0.307961,0.01795,0.327406,0.0488421,CPU,true
-idle,VectorAdd,1048576,20,0.3535,1.65671,0.376514,1.70794,0.213375,CPU,true
-idle,MatrixMultiply,256,20,8.65999,0.290781,8.70757,0.303107,29.7818,GPU,true
-idle,MatrixMultiply,512,20,110.95,1.31734,112.584,1.44616,84.2227,GPU,true

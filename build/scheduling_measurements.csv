@@ -1,3 +1,0 @@
-task_id,task_type,dimension,target,base_cpu_ms,base_gpu_ms,estimated_cpu_ms,estimated_gpu_ms,scheduling_ms,executor_ms,validation_ms,total_task_ms,predicted_selected_ms,absolute_error_ms,relative_error_percent,correct
-1,VectorAdd,65536,CPU,0.011524,0.222420,0.011696,0.222420,0.026800,0.114933,0.190777,0.425230,0.011696,0.103237,882.669289,true
-2,MatrixMultiply,256,GPU,8.778370,0.355828,8.880699,0.355828,0.003013,1.280556,13.417951,14.781157,0.355828,0.924728,259.880616,true

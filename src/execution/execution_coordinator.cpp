@@ -1,6 +1,7 @@
 
 #include "execution/execution_coordinator.hpp"
 #include "execution/gpu_executor.hpp"
+#include "kernel/kernel_event_client.hpp"
 
 #include <chrono>
 #include <exception>
@@ -144,6 +145,7 @@ bool ExecutionCoordinator::execute(Task& task)
 
     // Execution succeeded. Output correctness is validated separately
     // by the caller, for example through verify_output(task).
+
     if (!task.complete()) {
         task.fail();
 
@@ -153,8 +155,17 @@ bool ExecutionCoordinator::execute(Task& task)
         return false;
     }
 
+    // Best-effort kernel telemetry. A missing monitor must not affect
+    // successful execution or the task's Completed state.
+    if (!heteroos::record_kernel_event(task.target())) {
+        std::cerr
+            << "HeteroOS kernel monitor unavailable; "
+            << "event was not recorded.\n";
+    }
+
     return true;
 }
+
 
 double ExecutionCoordinator::last_execution_ms() const
 {

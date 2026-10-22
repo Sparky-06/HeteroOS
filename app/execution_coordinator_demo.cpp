@@ -17,6 +17,8 @@
 #include <thread>
 #include <vector>
 #include <utility>
+#include <cstdio>
+#include <sstream>
 
 bool verify_output(const Task& task)
 {
@@ -84,6 +86,56 @@ void write_optional(
         output << *value;
     }
 }
+
+
+
+struct KernelEventStats {
+    long long cpu_tasks = 0;
+    long long gpu_tasks = 0;
+    long long total_tasks = 0;
+    bool available = false;
+};
+
+
+KernelEventStats read_kernel_event_stats()
+{
+    KernelEventStats stats;
+
+    std::ifstream events("/proc/heteroos/events");
+    if (!events) {
+        return stats;
+    }
+
+    std::string line;
+
+    while (std::getline(events, line)) {
+        std::istringstream parser(line);
+        std::string key;
+        long long value = 0;
+
+        if (!(parser >> key >> value)) {
+            continue;
+        }
+
+        // The kernel prints keys as "cpu_tasks:", etc.
+        if (!key.empty() && key.back() == ':') {
+            key.pop_back();
+        }
+
+        if (key == "cpu_tasks") {
+            stats.cpu_tasks = value;
+        } else if (key == "gpu_tasks") {
+            stats.gpu_tasks = value;
+        } else if (key == "total_tasks") {
+            stats.total_tasks = value;
+        }
+    }
+
+    stats.available = true;
+    return stats;
+}
+
+
 
 
 
@@ -176,6 +228,8 @@ int main()
     std::cout << "\nScheduling and execution:\n";
 
     bool all_tasks_correct = true;
+    std::size_t run_cpu_tasks = 0;
+    std::size_t run_gpu_tasks = 0;
 
     
     while (!manager.empty()) {
@@ -361,6 +415,12 @@ int main()
                 << (correct ? "verified" : "INVALID") << '\n';
         
         if (correct) {
+
+            if (task->target() == ExecutionTarget::CPU) {
+                ++run_cpu_tasks;
+            } else if (task->target() == ExecutionTarget::GPU) {
+                ++run_gpu_tasks;
+            }
             profiler.record({
                 task->type(),
                 task->dimension(),
@@ -459,6 +519,27 @@ int main()
         std::cerr << "One or more task validations failed.\n";
         return 1;
     }
+
+
+    std::cout << "\nPer-run verified task counts:\n"
+              << "  CPU tasks: " << run_cpu_tasks << '\n'
+              << "  GPU tasks: " << run_gpu_tasks << '\n'
+              << "  Total:     "
+              << run_cpu_tasks + run_gpu_tasks << '\n';
+
+    const KernelEventStats kernel_stats =
+        read_kernel_event_stats();
+
+    std::cout << "\nCumulative kernel event counters:\n";
+
+    if (kernel_stats.available) {
+        std::cout << "  CPU events: " << kernel_stats.cpu_tasks << '\n'
+                  << "  GPU events: " << kernel_stats.gpu_tasks << '\n'
+                  << "  Total:      " << kernel_stats.total_tasks << '\n';
+    } else {
+        std::cout << "  Kernel monitor unavailable.\n";
+    }
+
 
     std::cout << "\nScheduler validation passed.\n"
               << "Measurement report: "

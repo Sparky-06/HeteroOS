@@ -350,6 +350,7 @@ target_compile_options(gpu-cold-start-diagnostic PRIVATE
 add_executable(profiler-test
     app/profiler_test.cpp
     src/profiling/profiler.cpp
+    src/task/task.cpp
 )
 
 target_include_directories(profiler-test PRIVATE include)
