@@ -380,3 +380,34 @@ target_include_directories(profiler-calibration PRIVATE include)
 target_compile_options(profiler-calibration PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Wpedantic>
 )
+
+
+
+
+# --------------------------------------------------
+# Memory Bandwidth Benchmark
+# --------------------------------------------------
+
+add_executable(memory-bandwidth-benchmark
+    app/memory_bandwidth_benchmark.cpp
+)
+
+target_compile_options(memory-bandwidth-benchmark PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+)
+
+# --------------------------------------------------
+# Multi-Buffer Memory Bandwidth Benchmark
+# --------------------------------------------------
+
+add_executable(memory-bandwidth-stream-benchmark
+    app/memory_bandwidth_stream_benchmark.cpp
+)
+
+target_compile_options(memory-bandwidth-stream-benchmark PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+)
