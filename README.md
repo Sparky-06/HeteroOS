@@ -38,7 +38,7 @@ Version 1 focuses on a working end-to-end path: submit a supported task, choose 
 │ Task submission and task management                       │
 │                    │                                      │
 │                    ▼                                      │
-│ Resource monitoring ──► Cost estimation ──► Scheduler    │
+│ Resource monitoring ──► Cost estimation ──► Scheduler     │
 │                                              │            │
 │                              ┌───────────────┴──────────┐ │
 │                              ▼                          ▼ │
@@ -49,7 +49,7 @@ Version 1 focuses on a working end-to-end path: submit a supported task, choose 
 │                                              │            │
 │                                 Profiling / CSV output    │
 │                                              │            │
-│                                 Kernel event client      │
+│                                 Kernel event client       │
 └──────────────────────────────────────────────┼────────────┘
                                                ▼
                                    Linux kernel module
